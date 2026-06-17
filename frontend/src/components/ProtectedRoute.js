@@ -1,0 +1,20 @@
+import { Navigate } from "react-router-dom";
+
+function ProtectedRoute({
+  children,
+  allowedRole,
+}) {
+  const role = window.ROLE;
+
+  if (!role) {
+    return <Navigate to="/login" />;
+  }
+
+  if (role !== allowedRole) {
+    return <Navigate to="/login" />;
+  }
+
+  return children;
+}
+
+export default ProtectedRoute;
